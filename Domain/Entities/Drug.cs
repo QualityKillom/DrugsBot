@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Domain.Validators;
+using static Domain.Entities.Country;
 
 namespace Domain.Entities
 {
@@ -51,5 +52,9 @@ namespace Domain.Entities
                 throw new ValidationException(errors);
             }
         }
+
+        
     }
+
+    
 }
