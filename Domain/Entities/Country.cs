@@ -133,14 +133,8 @@ namespace Domain.Entities
         /// </summary>
         public string Code { get; private set; }
         
-        // Навигационное свойство для связи с препаратами
+       
         public ICollection<Drug> Drugs { get; private set; } = new List<Drug>();
-        
-        private void Validate() 
-        { 
-            var validator = new CountryValidator();
-            var result = validator.Validate(this);
-        }
         
         
     }

@@ -20,7 +20,7 @@ public class DrugStoreValidator : AbstractValidator<DrugStore>
             .Length(3, 100).WithMessage(ValidationMessage.WrongLenght);
         RuleFor(ds => ds.Address.City)
             .Length(2, 50).WithMessage(ValidationMessage.WrongLenght);
-        RuleFor(ds => ds.Address.PostalCode)
-            
+        RuleFor(ds => ds.Address.PostalCode.ToString())
+            .Matches(@"^[1-9][0-9]{4,5}$");
     }
 }

@@ -1,5 +1,4 @@
-﻿using static Domain.Entities.Country;
-using Domain.Entities;
+﻿using Domain.Entities;
 using FluentValidation;
 namespace Domain.Validators
 {
@@ -22,11 +21,10 @@ namespace Domain.Validators
                 .Length(2).WithMessage(ValidationMessage.WrongLenght)
                 .Matches(@"^[A-Z]{2}").WithMessage(ValidationMessage.WrongText)
                 .Must(BeAValidCountryCode).WithMessage(ValidationMessage.CountryCodeInvalid);
-            
-            bool BeAValidCountryCode(string countryCodeId)
-            {
-                return CountryCodes.ContainsKey(countryCodeId);
-            }
+        }
+        private bool BeAValidCountryCode(string countryCodeId)
+        {
+            return Country.CountryCodes.ContainsKey(countryCodeId);
         }
     }
 }
