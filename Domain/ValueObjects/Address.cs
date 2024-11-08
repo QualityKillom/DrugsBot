@@ -11,12 +11,12 @@
         /// <param name="city">Город.</param>
         /// <param name="street">Улица.</param>
         /// <param name="house">Номер дома.</param>
-        public Address(string city, string street, string house, int postcode)
+        public Address(string city, string street, string house, int postalcode)
         {
             City = city;
             Street = street;
             House = house;
-            PostalCode = postcode;
+            PostalCode = postalcode;
         }
         
         /// <summary>
