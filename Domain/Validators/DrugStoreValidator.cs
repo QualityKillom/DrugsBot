@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Domain.Entities;
+﻿using Domain.Entities;
 using FluentValidation;
 
 namespace Domain.Validators;
@@ -21,6 +20,12 @@ public class DrugStoreValidator : AbstractValidator<DrugStore>
         RuleFor(ds => ds.Address.City)
             .Length(2, 50).WithMessage(ValidationMessage.WrongLenght);
         RuleFor(ds => ds.Address.PostalCode.ToString())
-            .Matches(@"^[1-9][0-9]{4,5}$");
+            .Matches(@"^[1-9][0-9]{4,5}$")
+            .Must(BeAValidCountryCode).WithMessage(ValidationMessage.CountryCodeInvalid);
     }
+    private bool BeAValidCountryCode(string isoAlpha2Code)
+    {
+        return Country.CountryCodes.ContainsKey(isoAlpha2Code);
+    }
+    
 }
