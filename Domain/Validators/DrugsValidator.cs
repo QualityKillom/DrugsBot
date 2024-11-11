@@ -1,30 +1,35 @@
 ﻿using Domain.Entities;
 using FluentValidation;
-namespace Domain.Validators
-{
-    public class DrugsValidator : AbstractValidator<Drug>
-    {
-        public DrugsValidator()
-        {
-            
-            RuleFor(d => d.Name)
-                .NotNull().WithMessage(ValidationMessage.NotNull)
-                .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
-                .Length(2, 150).WithMessage(ValidationMessage.WrongLenght)
-                .Matches(@"^[a-zA-Zа-яА-Я\s]+$").WithMessage(ValidationMessage.WrongText);
-            
-            RuleFor(d => d.Manufacturer)
-                .Matches(@"^[a-zA-Zа-яА-Я\s\-]+$").WithMessage(ValidationMessage.WrongText)
-                .Length(2, 100).WithMessage(ValidationMessage.WrongLenght);
 
-            RuleFor(d => d.CountryCodeId)
-                .Length(2).WithMessage(ValidationMessage.WrongLenght)
-                .Matches(@"^[A-Z]{2}").WithMessage(ValidationMessage.WrongText)
-                .Must(BeAValidCountryCode).WithMessage(ValidationMessage.CountryCodeInvalid);
-        }
-        private bool BeAValidCountryCode(string countryCodeId)
-        {
-            return Country.CountryCodes.ContainsKey(countryCodeId);
-        }
+namespace Domain.Validators;
+
+public class DrugsValidator : AbstractValidator<Drug>
+{
+    public DrugsValidator()
+    {
+        RuleFor(d => d.Name)
+            .NotNull().WithMessage(ValidationMessage.NotNull)
+            .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
+            .Length(2, 150).WithMessage(ValidationMessage.WrongLenght)
+            .Matches("^[a-zA-Z0-9]+$").WithMessage(ValidationMessage.WrongCharacters);
+        
+        RuleFor(d =>d.Manufacturer)
+            .NotNull().WithMessage(ValidationMessage.NotNull)
+            .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
+            .Length(2, 100).WithMessage(ValidationMessage.WrongLenght)
+            .Matches(@"^[a-zA-Zа-яА-ЯёЁ\s]+$").WithMessage(ValidationMessage.WrongCharacters);
+
+        RuleFor(d => d.CountryCodeId)
+            .NotNull().WithMessage(ValidationMessage.NotNull)
+            .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
+            .Matches("^[A-Z]+$").WithMessage(ValidationMessage.WrongCharacters)
+            .Must(BeAValidCountryCode).WithMessage(ValidationMessage.CountryCodeInvalid);
+        RuleFor(d => d.Country)
+            .NotNull().WithMessage(ValidationMessage.NotNull)
+            .NotEmpty().WithMessage(ValidationMessage.NotEmpty);
+    }
+    private bool BeAValidCountryCode(string countryCodeId)
+    {
+        return Country.CountryCodes.Contains(countryCodeId);
     }
 }

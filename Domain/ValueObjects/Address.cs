@@ -11,7 +11,7 @@
         /// <param name="city">Город.</param>
         /// <param name="street">Улица.</param>
         /// <param name="house">Номер дома.</param>
-        public Address(string city, string street, string house, int postalcode)
+        public Address(string city, string street, int house, int postalcode)
         {
             City = city;
             Street = street;
@@ -32,7 +32,7 @@
         /// <summary>
         /// Номер дома.
         /// </summary>
-        public string House { get; private set; }
+        public int House { get; private set; }
 
         /// <summary>
         /// Почтовый индекс.
