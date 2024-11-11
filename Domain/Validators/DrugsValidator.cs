@@ -11,7 +11,7 @@ public class DrugsValidator : AbstractValidator<Drug>
             .NotNull().WithMessage(ValidationMessage.NotNull)
             .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
             .Length(2, 150).WithMessage(ValidationMessage.WrongLenght)
-            .Matches("^[a-zA-Z0-9]+$").WithMessage(ValidationMessage.WrongCharacters);
+            .Matches(@"^[a-zA-Zа-яА-ЯёЁ0-9\s\-\.,\\:;'@]+$").WithMessage(ValidationMessage.WrongCharacters);
         
         RuleFor(d =>d.Manufacturer)
             .NotNull().WithMessage(ValidationMessage.NotNull)
