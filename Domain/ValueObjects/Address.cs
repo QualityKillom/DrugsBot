@@ -1,4 +1,7 @@
-﻿namespace Domain.ValueObjects
+﻿using Domain.Validators;
+using FluentValidation;
+
+namespace Domain.ValueObjects
 {
     /// <summary>
     /// Объект значения, представляющий адрес.
@@ -17,8 +20,19 @@
             Street = street;
             House = house;
             PostalCode = postalcode;
+            Validate();
         }
-        
+        public void Validate()
+        {
+            var validator = new AddressValidator();
+            var result = validator.Validate(this);
+
+            if (!result.IsValid)
+            {
+                var errors = string.Join(' ', result.Errors.Select(x => x.ErrorMessage));
+                throw new ValidationException(errors);
+            }
+        }
         /// <summary>
         /// Город.
         /// </summary>

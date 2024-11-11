@@ -1,4 +1,7 @@
-﻿namespace Domain.Entities
+﻿using Domain.Validators;
+using FluentValidation;
+
+namespace Domain.Entities
 {
     /// <summary>
     /// Связь между препаратом и аптекой
@@ -13,8 +16,20 @@
             Count = count;
             Drug = drug;
             DrugStore = drugStore;
+            Validate();
         }
 
+        public void Validate()
+        {
+            var validator = new DrugItemValidator();
+            var result = validator.Validate(this);
+
+            if (!result.IsValid)
+            {
+                var errors = string.Join(' ', result.Errors.Select(x => x.ErrorMessage));
+                throw new ValidationException(errors);
+            }
+        }
         /// <summary>
         /// Идентификатор препарата.
         /// </summary>

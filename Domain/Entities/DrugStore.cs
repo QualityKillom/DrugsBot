@@ -1,4 +1,6 @@
-﻿using Domain.ValueObjects;
+﻿using Domain.Validators;
+using Domain.ValueObjects;
+using FluentValidation;
 
 namespace Domain.Entities
 {
@@ -12,8 +14,19 @@ namespace Domain.Entities
             DrugNetwork = drugNetwork;
             Number = number;
             Address = address;
+            Validate();
         }
+        public void Validate()
+        {
+            var validator = new DrugStoreValidator();
+            var result = validator.Validate(this);
 
+            if (!result.IsValid)
+            {
+                var errors = string.Join(' ', result.Errors.Select(x => x.ErrorMessage));
+                throw new ValidationException(errors);
+            }
+        }
         /// <summary>
         /// Сеть аптек, к которой принадлежит аптека.
         /// </summary>

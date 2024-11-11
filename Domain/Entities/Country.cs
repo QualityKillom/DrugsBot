@@ -1,4 +1,5 @@
 ﻿using Domain.Validators;
+using FluentValidation;
 
 namespace Domain.Entities
 {
@@ -28,8 +29,20 @@ namespace Domain.Entities
         {
             Name = name;
             Code = code;
+            Validate();
         }
+        private void Validate()
+        {
+            var validator = new CountryValidator();
+            var result = validator.Validate(this);
 
+            if (!result.IsValid)
+            {
+                var errors = string.Join("  ", result.Errors.Select(x => x.ErrorMessage));
+                
+                throw new ValidationException(errors);
+            }
+        }
         /// <summary>
         /// Название страны.
         /// </summary>
@@ -41,7 +54,7 @@ namespace Domain.Entities
         public string Code { get; private set; }
         
        
-        public ICollection<Drug> Drugs { get; private set; } = new List<Drug>();
+        public ICollection<Drug> Drugs { get; private set; }
         
         
     }

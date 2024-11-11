@@ -24,6 +24,7 @@ public class DrugsValidator : AbstractValidator<Drug>
             .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
             .Matches("^[A-Z]+$").WithMessage(ValidationMessage.WrongCharacters)
             .Must(BeAValidCountryCode).WithMessage(ValidationMessage.CountryCodeInvalid);
+        
         RuleFor(d => d.Country)
             .NotNull().WithMessage(ValidationMessage.NotNull)
             .NotEmpty().WithMessage(ValidationMessage.NotEmpty);

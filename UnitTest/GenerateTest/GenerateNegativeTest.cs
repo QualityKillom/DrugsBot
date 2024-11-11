@@ -45,12 +45,12 @@ namespace UnitTest.GenerateTest
             var drug = DrugGenerator.Generator();
             return new List<object[]>
             {
-                new object[] {null,drugStore.Id, _faker.Random.Decimal(1), _faker.Random.Int(1, 1000), drug,  drugStore },
-                new object[] {drug.Id,null, _faker.Random.Decimal(1), _faker.Random.Int(1, 1000), drug,  drugStore  },
-                new object[] {drug.Id,drugStore.Id, -1, _faker.Random.Int(1, 1000), drug,  drugStore  },
+                new object[] {null,drugStore.Id, _faker.Random.Decimal(1), _faker.Random.Int(1, 100), drug,  drugStore },
+                new object[] {drug.Id,null, _faker.Random.Decimal(1), _faker.Random.Int(1, 100), drug,  drugStore  },
+                new object[] {drug.Id,drugStore.Id, -1, _faker.Random.Int(1, 100), drug,  drugStore  },
                 new object[] {drug.Id,drugStore.Id, _faker.Random.Decimal(1),-1, drug,  drugStore  },
-                new object[] {drug.Id,drugStore.Id, _faker.Random.Decimal(1), _faker.Random.Int(1, 1000), null,  drugStore  },
-                new object[] {drug.Id,drugStore.Id, _faker.Random.Decimal(1), _faker.Random.Int(1, 1000), drug,  null  },
+                new object[] {drug.Id,drugStore.Id, _faker.Random.Decimal(1), _faker.Random.Int(1, 100), null,  drugStore  },
+                new object[] {drug.Id,drugStore.Id, _faker.Random.Decimal(1), _faker.Random.Int(1, 100), drug,  null  },
 
             };
         }
