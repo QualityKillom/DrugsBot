@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
+using UnitTest.InvalidItem.InvalidEmails;
 
 namespace UnitTest.GenerateTest
 {
@@ -63,6 +64,23 @@ namespace UnitTest.GenerateTest
                 new object[] { null, _faker.Random.Int(1, 10), new Address(_faker.Address.StreetName(), _faker.Address.City(), _faker.Random.Int(1, 10), _faker.Random.Int(10000, 999999)) },
                 new object[] { _faker.Random.String2(1, 10000), null, new Address(_faker.Address.StreetName(), _faker.Address.City(), _faker.Random.Int(1, 10), _faker.Random.Int(10000, 999999))},
                 new object[] { _faker.Random.String2(1, 10000), _faker.Random.Int(1, 10), new Address(_faker.Address.StreetName(), _faker.Address.City(), _faker.Random.Int(1, 10), _faker.Random.Int(10000, 999999)) },
+            };
+        }
+
+        public static IEnumerable<object[]> GetProfileValidationExceptionsProperties()
+        {
+            return new List<object[]>
+            {
+                new object[]{null, null},
+                new object[]{_faker.Random.AlphaNumeric(8), null},
+            };
+        }
+        public static IEnumerable<object[]> GetEmailValidationExceptionsProperties()
+        {
+            return new List<object[]>
+            {
+                new object[] {_faker.PickRandom(InvalidEmails.invalidEmails.ToList())},
+                new object[]{null},
             };
         }
     }

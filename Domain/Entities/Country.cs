@@ -6,7 +6,7 @@ namespace Domain.Entities
     /// <summary>
     /// Справочник стран
     /// </summary>
-    public class Country : BaseEntity
+    public class Country : BaseEntity<Country>
     {
         public static readonly HashSet<string> CountryCodes = new()
         {

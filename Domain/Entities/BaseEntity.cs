@@ -1,10 +1,14 @@
-﻿namespace Domain.Entities
+﻿using Domain.Interface;
+using FluentValidation;
+
+namespace Domain.Entities
 {
     /// <summary>
     /// Базовый класс для всех сущностей домена, обеспечивающий сравнение по идентификатору.
     /// </summary>
-    public abstract class BaseEntity
+    public abstract class BaseEntity<T> where T : BaseEntity<T>
     {
+        public List<IDomainEvent> _domainEvents { get; set; } = new List<IDomainEvent>();
         /// <summary>
         /// Уникальный идентификатор сущности.
         /// </summary>
@@ -17,7 +21,26 @@
         {
             Id = Guid.NewGuid();
         }
+
+        protected void AddDomainEvent(IDomainEvent domainEvent)
+        {
+            _domainEvents.Add(domainEvent);
+        }
+
+        public IReadOnlyList<IDomainEvent> GetDomainEvents()
+        {
+            return _domainEvents.AsReadOnly();
+        }
         
+        protected void ValidateEntity(AbstractValidator<T> validator)
+        {
+            var validationResult = validator.Validate((T)this);
+            if (!validationResult.IsValid)
+            {
+                var errorMessages = string.Join("; ", validationResult.Errors.Select(e => e.ErrorMessage));
+                throw new ValidationException(errorMessages);
+            }
+        }
         /// <summary>
         /// Переопределение метода Equals для сравнения сущностей по идентификатору.
         /// </summary>
@@ -31,7 +54,7 @@
             if (obj is null || obj.GetType() != GetType())
                 return false;
 
-            var other = (BaseEntity)obj;
+            var other = (BaseEntity<T>)obj;
             return Id.Equals(other.Id);
         }
 
@@ -50,7 +73,7 @@
         /// <param name="left">Левая сущность.</param>
         /// <param name="right">Правая сущность.</param>
         /// <returns>True, если идентификаторы равны; иначе False.</returns>
-        public static bool operator ==(BaseEntity? left, BaseEntity? right)
+        public static bool operator ==(BaseEntity<T>? left, BaseEntity<T>? right)
         {
             if (left is null)
                 return right is null;
@@ -64,7 +87,7 @@
         /// <param name="left">Левая сущность.</param>
         /// <param name="right">Правая сущность.</param>
         /// <returns>True, если идентификаторы не равны; иначе False.</returns>
-        public static bool operator !=(BaseEntity? left, BaseEntity? right)
+        public static bool operator !=(BaseEntity<T>? left, BaseEntity<T>? right)
         {
             return !(left == right);
         }

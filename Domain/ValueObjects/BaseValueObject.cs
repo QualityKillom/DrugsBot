@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using FluentValidation;
 
 namespace Domain.ValueObjects
 {
@@ -112,6 +113,15 @@ namespace Domain.ValueObjects
         public static bool operator !=(BaseValueObject? left, BaseValueObject? right)
         {
             return !(left == right);
+        }
+        protected void ValidateValueObject<T>(IValidator<T> validator) where T : BaseValueObject
+        {
+            var result = validator.Validate((T)this);
+            if (!result.IsValid)
+            {
+                var errors = string.Join("; ", result.Errors.Select(e => e.ErrorMessage));
+                throw new ValidationException($"Validation failed for {typeof(T).Name}: {errors}");
+            }
         }
     }
 }
