@@ -3,7 +3,7 @@ using FluentAssertions;
 using FluentValidation;
 using UnitTest.GenerateTest;
 
-namespace UnitTest.NegativeTest.DrugTest;
+namespace UnitTest.NegativeTest.EntitiesTest.DrugTest;
 
 public class DrugNegativeTest
 {

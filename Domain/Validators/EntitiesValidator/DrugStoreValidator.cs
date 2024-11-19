@@ -1,21 +1,22 @@
 ﻿using Domain.Entities;
 using FluentValidation;
 
-namespace Domain.Validators;
-
-public class DrugStoreValidator : AbstractValidator<DrugStore>
+namespace Domain.Validators
 {
-    public DrugStoreValidator()
+    public class DrugStoreValidator : AbstractValidator<DrugStore>
     {
-        RuleFor(ds => ds.DrugNetwork)
-            .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
-            .Length(2,100).WithMessage(ValidationMessage.WrongLenght);
-        RuleFor(ds => ds.Number)
-            .GreaterThan(0).WithMessage(ValidationMessage.WrongPolarity);
+        public DrugStoreValidator()
+        {
+            RuleFor(ds => ds.DrugNetwork)
+                .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
+                .Length(2,100).WithMessage(ValidationMessage.WrongLenght);
+            RuleFor(ds => ds.Number)
+                .GreaterThan(0).WithMessage(ValidationMessage.WrongPolarity);
             //не сильно понял чо надо :( 
-        RuleFor(ds => ds.Address)
+            RuleFor(ds => ds.Address)
                 .NotEmpty().WithMessage(ValidationMessage.NotEmpty);
         
-    }
+        }
     
+    }
 }

@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using FluentAssertions;
 
-namespace UnitTest.PositiveTest.CountryTest;
+namespace UnitTest.PositiveTest.EntitiesTest.CountryTest;
 
 public class CountryPositiveTest
 {

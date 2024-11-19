@@ -1,8 +1,8 @@
-﻿using Domain.Entities;
+﻿using Bogus;
+using Domain.Entities;
 using Domain.ValueObjects;
-using Bogus;
 
-namespace UnitTest.GenerateTest;
+namespace UnitTest.GenerateTest.EntitiesGenerator;
 
 public class DrugStoreGenerator
 {

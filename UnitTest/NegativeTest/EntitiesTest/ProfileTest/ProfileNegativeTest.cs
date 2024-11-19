@@ -4,7 +4,7 @@ using FluentAssertions;
 using FluentValidation;
 using UnitTest.GenerateTest;
 
-namespace UnitTest.NegativeTest.ProfileTest;
+namespace UnitTest.NegativeTest.EntitiesTest.ProfileTest;
 
 public class ProfileNegativeTest
 {

@@ -4,7 +4,7 @@ using FluentAssertions;
 using FluentValidation;
 using UnitTest.GenerateTest;
 
-namespace UnitTest.NegativeTest.DrugStoreTest;
+namespace UnitTest.NegativeTest.EntitiesTest.DrugStoreTest;
 
 public class DrugStoreNegativeTest
 {

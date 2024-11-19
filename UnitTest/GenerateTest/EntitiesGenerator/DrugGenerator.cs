@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Domain.Entities;
 
-namespace UnitTest.GenerateTest;
+namespace UnitTest.GenerateTest.EntitiesGenerator;
 
 public class DrugGenerator
 {

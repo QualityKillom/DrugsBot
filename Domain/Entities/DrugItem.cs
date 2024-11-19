@@ -1,5 +1,6 @@
 ﻿using Domain.DomainEvents;
 using Domain.Validators;
+using Domain.Validators.EntitiesValidator;
 using FluentValidation;
 
 namespace Domain.Entities
@@ -17,20 +18,10 @@ namespace Domain.Entities
             Count = count;
             Drug = drug;
             DrugStore = drugStore;
-            Validate();
+            ValidateEntity(new DrugItemValidator());
         }
 
-        public void Validate()
-        {
-            var validator = new DrugItemValidator();
-            var result = validator.Validate(this);
-
-            if (!result.IsValid)
-            {
-                var errors = string.Join(' ', result.Errors.Select(x => x.ErrorMessage));
-                throw new ValidationException(errors);
-            }
-        }
+        
         /// <summary>
         /// Идентификатор препарата.
         /// </summary>

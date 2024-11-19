@@ -9,8 +9,9 @@ public sealed class ProfileValidator : AbstractValidator<Profile>
     {
         RuleFor(p => p.ExternalId)
             .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
-            .Length(2, 100).WithMessage(ValidationMessage.WrongLenght );
+            .Length(2, 255).WithMessage(ValidationMessage.WrongLenght );
         RuleFor(p => p.Email)
             .NotEmpty().WithMessage(ValidationMessage.NotEmpty);
+
     }
 }

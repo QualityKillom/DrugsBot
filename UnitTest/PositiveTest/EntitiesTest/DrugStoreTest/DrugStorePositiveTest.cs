@@ -1,10 +1,8 @@
-﻿using Bogus.DataSets;
-using Domain.Entities;
+﻿using Domain.Entities;
 using FluentAssertions;
-using Domain.ValueObjects;
 using Address = Domain.ValueObjects.Address;
 
-namespace UnitTest.PositiveTest.DrugStoreTest;
+namespace UnitTest.PositiveTest.EntitiesTest.DrugStoreTest;
 
 public class DrugStorePositiveTest
 {

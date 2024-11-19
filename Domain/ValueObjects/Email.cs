@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Validators;
+using Domain.Validators.ValueObjectsValidator;
 
 namespace Domain.ValueObjects;
 

@@ -1,8 +1,9 @@
 ﻿using Domain.Entities;
 using FluentAssertions;
 using UnitTest.GenerateTest;
+using UnitTest.GenerateTest.EntitiesGenerator;
 
-namespace UnitTest.PositiveTest.DrugItemTest;
+namespace UnitTest.PositiveTest.EntitiesTest.DrugItemTest;
 
 public class DrugItemPositiveTest
 {

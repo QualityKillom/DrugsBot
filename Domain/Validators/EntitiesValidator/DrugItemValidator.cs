@@ -2,7 +2,7 @@
 using Domain.Entities;
 using FluentValidation;
 
-namespace Domain.Validators;
+namespace Domain.Validators.EntitiesValidator;
 
 public class DrugItemValidator : AbstractValidator<DrugItem>
 {

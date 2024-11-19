@@ -1,7 +1,7 @@
 ﻿using Domain.ValueObjects;
 using FluentAssertions;
 
-namespace UnitTest.PositiveTest.EmailTest;
+namespace UnitTest.PositiveTest.ValueObjectsTest.EmailTest;
 
 public class EmailPositiveTest
 {

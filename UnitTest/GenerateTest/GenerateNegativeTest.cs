@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.ValueObjects;
+using UnitTest.GenerateTest.EntitiesGenerator;
 using UnitTest.InvalidItem.InvalidEmails;
 
 namespace UnitTest.GenerateTest
@@ -71,7 +72,7 @@ namespace UnitTest.GenerateTest
         {
             return new List<object[]>
             {
-                new object[]{null, null},
+                new object[]{null, new Email(_faker.Internet.Email())},
                 new object[]{_faker.Random.AlphaNumeric(8), null},
             };
         }
@@ -81,6 +82,20 @@ namespace UnitTest.GenerateTest
             {
                 new object[] {_faker.PickRandom(InvalidEmails.invalidEmails.ToList())},
                 new object[]{null},
+            };
+        }
+
+        public static IEnumerable<object[]> GetFavoritesValidationExceptionsProperties()
+        {
+            var profile = ProfileGenerator.Generator();
+            var drug = DrugGenerator.Generator();
+        
+            return new List<object[]>
+            {
+                new object[] {null, profile.Id, drug.Id, drug },
+                new object[] {profile, null, drug.Id, drug },
+                new object[] {profile, profile.Id, null, drug },
+                new object[] {profile, profile.Id, drug.Id,null  },
             };
         }
     }

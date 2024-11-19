@@ -1,4 +1,5 @@
 ﻿using Domain.Validators;
+using Domain.Validators.EntitiesValidator;
 using Domain.ValueObjects;
 
 namespace Domain.Entities;
@@ -20,8 +21,8 @@ public class Profile : BaseEntity<Profile>
 
     /// <summary>
     /// Электронная почта.
-    /// </summary>
-    public Email Email { get; private set; }
+    /// </summary
+    public Email? Email { get; private set; }
 
     // Навигационное свойство для связи с FavoriteDrug.
     public List<FavoriteDrug> FavoriteDrugs { get; private set; } = [];

@@ -1,8 +1,7 @@
-﻿
-using Domain.ValueObjects;
+﻿using Domain.ValueObjects;
 using FluentValidation;
 
-namespace Domain.Validators;
+namespace Domain.Validators.ValueObjectsValidator;
 
 public sealed class EmailValidator : AbstractValidator<Email>
 {

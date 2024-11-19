@@ -2,7 +2,7 @@
 using Domain.ValueObjects;
 using FluentAssertions;
 
-namespace UnitTest.PositiveTest.ProfileTest;
+namespace UnitTest.PositiveTest.EntitiesTest.ProfileTest;
 
 public class ProfilePositiveTest
 {

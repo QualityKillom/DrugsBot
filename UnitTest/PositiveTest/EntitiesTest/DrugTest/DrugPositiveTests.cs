@@ -1,9 +1,9 @@
-﻿
-using Domain.Entities;
+﻿using Domain.Entities;
 using FluentAssertions;
 using UnitTest.GenerateTest;
+using UnitTest.GenerateTest.EntitiesGenerator;
 
-namespace UnitTest.PositiveTest.DrugTest;
+namespace UnitTest.PositiveTest.EntitiesTest.DrugTest;
 
 public class DrugPositiveTests
 {

@@ -29,9 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="NegativeTest\EntitiesTest\" />
       <Folder Include="NegativeTest\ValueObjectsTest\" />
-      <Folder Include="PositiveTest\EntitiesTest\" />
       <Folder Include="PositiveTest\ValueObjectsTest\" />
     </ItemGroup>
 

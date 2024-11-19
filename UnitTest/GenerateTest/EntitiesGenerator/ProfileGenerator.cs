@@ -2,7 +2,7 @@
 using Domain.Entities;
 using Domain.ValueObjects;
 
-namespace UnitTest.GenerateTest;
+namespace UnitTest.GenerateTest.EntitiesGenerator;
 
 public class ProfileGenerator
 {

@@ -1,7 +1,7 @@
 ﻿using Domain.ValueObjects;
 using FluentAssertions;
 
-namespace UnitTest.PositiveTest.AddressTest;
+namespace UnitTest.PositiveTest.ValueObjectsTest.AddressTest;
 
 public class AddressPositiveTest
 {

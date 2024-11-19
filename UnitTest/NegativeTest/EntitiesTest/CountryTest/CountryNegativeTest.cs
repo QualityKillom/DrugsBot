@@ -3,7 +3,7 @@ using FluentAssertions;
 using FluentValidation;
 using UnitTest.GenerateTest;
 
-namespace UnitTest.NegativeTest.CountryTest;
+namespace UnitTest.NegativeTest.EntitiesTest.CountryTest;
 
 public class CountryNegativeTest
 {
