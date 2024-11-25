@@ -3,11 +3,11 @@ using FluentValidation;
 
 namespace Domain.Validators.EventsValidator;
 
-public class DrugItemUpdatedEventValidator : AbstractValidator<DrugItemUpdatedEvent>
+public class DrugItemUpdatedEventValidator : AbstractValidator<DrugItemUpdateEvent>
 {
     public DrugItemUpdatedEventValidator()
     {
-        RuleFor(d => d.NewAmount)
+        RuleFor(d => d.NewCount)
             .NotNull().WithMessage(ValidationMessage.NotNull)
             .NotEmpty().WithMessage(ValidationMessage.NotEmpty)
             .GreaterThanOrEqualTo(0).WithMessage(ValidationMessage.WrongPolarity)

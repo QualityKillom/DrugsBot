@@ -1,5 +1,7 @@
-﻿using Domain.Interface;
+﻿using Domain.DomainEvents;
+using Domain.Interface;
 using FluentValidation;
+using DrugItemUpdateEvent = Domain.Events.DrugItemUpdateEvent;
 
 namespace Domain.Entities
 {
@@ -21,7 +23,11 @@ namespace Domain.Entities
         {
             Id = Guid.NewGuid();
         }
-
+        
+        /// <summary>
+        /// Добавить доменное событие.
+        /// </summary>
+        /// <param name="domainEvent">Доменное событие.</param>
         protected void AddDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents.Add(domainEvent);

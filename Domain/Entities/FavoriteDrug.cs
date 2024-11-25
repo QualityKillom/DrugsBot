@@ -20,15 +20,34 @@ public class FavoriteDrug : BaseEntity<FavoriteDrug>
         DrugStore = drugStore;
         ValidateEntity(new FavoriteDrugValidator());
     }
-    public DrugStore? DrugStore { get; set; }
+    /// <summary>
+    /// Идентификатор профиля.
+    /// </summary>
+    public Guid ExternalUserId { get; private init; }
 
-    public Guid? DrugStoreId { get;private set; }
-
-    public Drug Drug { get; private set; }
-
+    /// <summary>
+    /// Идентификатор препарата.
+    /// </summary>
     public Guid DrugId { get; private set; }
 
-    public Guid ExternalUserId { get; private set; }
-    
+    /// <summary>
+    /// Идентификатор аптеки.
+    /// </summary>
+    public Guid? DrugStoreId { get; private set; }
+
+    // Навигационные свойства
     public Profile Profile { get; private set; }
+    public Drug Drug { get; private set; }
+    public DrugStore? DrugStore { get; private set; }
+    
+    /// <summary>
+    /// Метод для обновления аптеки
+    /// </summary>
+    /// <param name="drugStoreId"></param>
+    /// <param name="drugStore"></param>
+    public void UpdateDrugStore(Guid? drugStoreId, DrugStore? drugStore)
+    {
+        DrugStoreId = drugStoreId;
+        DrugStore = drugStore;
+    }
 }

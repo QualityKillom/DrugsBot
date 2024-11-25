@@ -1,4 +1,5 @@
-﻿using Domain.Validators;
+﻿using Domain.DomainEvents;
+using Domain.Validators;
 using Domain.Validators.EntitiesValidator;
 using FluentValidation;
 
@@ -44,6 +45,38 @@ namespace Domain.Entities
                 throw new ValidationException(errors);
             }
         }
+        public void UpdateName(string name)
+        {
+            if (Name != name)
+            {
+                var previousName = Name;
+                Name = name;
+
+                ValidateEntity(new CountryValidator());
+
+                AddDomainEvent(new CountryUpdateEvent(this, previousName, name));
+            }
+        }
+        /// <summary>
+        /// Обновить код страны.
+        /// </summary>
+        /// <param name="code">Новый код страны.</param>
+        public void UpdateCode(string code)
+        {
+            if (!CountryCodes.Contains(code))
+                throw new ArgumentException("Неверный код страны.", nameof(code));
+
+            if (Code != code)
+            {
+                var previousCode = Code;
+                Code = code;
+
+                ValidateEntity(new CountryValidator());
+
+                AddDomainEvent(new CountryUpdateEvent(this, previousCode, code));
+            }
+        }
+
         /// <summary>
         /// Название страны.
         /// </summary>
