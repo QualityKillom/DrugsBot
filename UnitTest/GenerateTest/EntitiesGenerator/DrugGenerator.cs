@@ -5,6 +5,9 @@ namespace UnitTest.GenerateTest.EntitiesGenerator;
 
 public class DrugGenerator
 {
+    /// <summary>
+    /// Генератор сущности Drug для тестов
+    /// </summary>
     private static readonly Faker<Drug> _fakerDrug = new Faker<Drug>()
         .CustomInstantiator(d =>
         {
@@ -17,6 +20,10 @@ public class DrugGenerator
             );
         });
 
+    /// <summary>
+    /// Генератор лекарства 
+    /// </summary>
+    /// <returns></returns>
     public static Drug Generator()
     {
         return _fakerDrug.Generate();

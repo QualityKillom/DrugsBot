@@ -2,7 +2,7 @@
 
 namespace Domain.Interface;
 
-public interface IDomainEvent : INotification
-{
-    
-}
+/// <summary>
+/// Интерфейс доменных событий.
+/// </summary>
+public interface IDomainEvent : INotification;

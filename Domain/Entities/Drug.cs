@@ -17,20 +17,88 @@ public class Drug : BaseEntity<Drug>
         CountryCodeId = countryCodeId;
         Country = country;
         
-        Validate();
+        ValidateEntity(new DrugsValidator());
     }
-
-    public void Validate()
+    public Drug(string name, string manufacturer, string countryCodeId, Country country, List<DrugItem> drugItems)
     {
-        var validator = new DrugsValidator();
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-        {
-            var errors = string.Join(' ', result.Errors.Select(x => x.ErrorMessage));
-            throw new ValidationException(errors);
-        }
+        DrugItems = drugItems;
+        Name = name;
+        Manufacturer = manufacturer;
+        CountryCodeId = countryCodeId;
+        Country = country;
+        
+        ValidateEntity(new DrugsValidator());
     }
+    /// <summary>
+    /// Метод для обновления названия
+    /// </summary>
+    /// <param name="name"></param>
+    public void UpdateName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException("Name cannot be null or whitespace.", nameof(name));
+        }
+
+        Name = name;
+    }
+
+    /// <summary>
+    /// Метод для обновления производителя
+    /// </summary>
+    /// <param name="manufacturer"></param>
+    public void UpdateManufacturer(string manufacturer)
+    {
+        if (string.IsNullOrWhiteSpace(manufacturer))
+        {
+            throw new ArgumentException("Manufacturer cannot be null or whitespace.", nameof(manufacturer));
+        }
+
+        Manufacturer = manufacturer;
+    }
+
+    /// <summary>
+    /// Метод для обновления кода страны
+    /// </summary>
+    /// <param name="countryCodeId"></param>
+    public void UpdateCountryCode(string countryCodeId)
+    {
+        if (string.IsNullOrWhiteSpace(countryCodeId))
+        {
+            throw new ArgumentException("CountryCodeId cannot be null or whitespace.", nameof(countryCodeId));
+        }
+
+        CountryCodeId = countryCodeId;
+    }
+
+    /// <summary>
+    /// Метод для обновления страны
+    /// </summary>
+    /// <param name="country"></param>
+    public void UpdateCountry(Country country)
+    {
+        if (country == null)
+        {
+            throw new ArgumentNullException(nameof(country), "Country cannot be null.");
+        }
+
+        Country = country;
+    }
+
+    /// <summary>
+    /// Метод для обновления коллекции DrugItems
+    /// </summary>
+    /// <param name="drugItems"></param>
+    public void UpdateDrugItems(ICollection<DrugItem> drugItems)
+    {
+        if (drugItems == null || !drugItems.Any())
+        {
+            throw new ArgumentException("DrugItems cannot be null or empty.", nameof(drugItems));
+        }
+
+        DrugItems = drugItems.ToList();
+    }
+    
     /// <summary>
     /// Наименование
     /// </summary>
@@ -47,5 +115,8 @@ public class Drug : BaseEntity<Drug>
     /// Страна
     /// </summary>
     public Country Country { get; private set; }
+    /// <summary>
+    /// Навигационное свойство для связи с DrugItem.
+    /// </summary>
     public ICollection<DrugItem> DrugItems { get; private set; }
 }

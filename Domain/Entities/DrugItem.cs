@@ -1,7 +1,6 @@
-﻿using Domain.DomainEvents;
-using Domain.Validators;
-using Domain.Validators.EntitiesValidator;
-using FluentValidation;
+﻿using Domain.Validators.EntitiesValidator;
+using Domain.Events;
+
 
 namespace Domain.Entities
 {
@@ -18,6 +17,7 @@ namespace Domain.Entities
             Count = count;
             Drug = drug;
             DrugStore = drugStore;
+            
             ValidateEntity(new DrugItemValidator());
         }
 
@@ -46,13 +46,58 @@ namespace Domain.Entities
         public Drug Drug { get; private set; }
         public DrugStore DrugStore { get; private set; }
 
-        public void UpdateDrugCount(int count)
+        /// <summary>
+        /// Обновить стоимость препарата.
+        /// </summary>
+        /// <param name="cost">Новая стоимость</param>
+        public void UpdateCost(decimal cost)
+        {
+            
+            Cost = cost;
+
+            ValidateEntity(new DrugItemValidator());
+
+            AddDomainEvent(new DrugItemUpdateEvent());
+        }
+
+        /// <summary>
+        /// Обновить количество препарата на складе.
+        /// </summary>
+        /// <param name="count">Новое количество</param>
+        public void UpdateCount(int count)
         {
             Count = count;
 
             ValidateEntity(new DrugItemValidator());
-            
-            AddDomainEvent(new DrugItemUpdatedEvent(this.Id, count));
+
+            AddDomainEvent(new DrugItemUpdateEvent());
         }
+
+        /// <summary>
+        /// Обновить связь с препаратом.
+        /// </summary>
+        /// <param name="drug">Новый объект препарата</param>
+        public void UpdateDrug(Drug drug)
+        {
+            Drug = drug ?? throw new ArgumentNullException(nameof(drug));
+
+            ValidateEntity(new DrugItemValidator());
+
+            AddDomainEvent(new DrugItemUpdateEvent());
+        }
+
+        /// <summary>
+        /// Обновить связь с аптекой.
+        /// </summary>
+        /// <param name="drugStore">Новый объект аптеки</param>
+        public void UpdateDrugStore(DrugStore drugStore)
+        {
+            DrugStore = drugStore ?? throw new ArgumentNullException(nameof(drugStore));
+
+            ValidateEntity(new DrugItemValidator());
+
+            AddDomainEvent(new DrugItemUpdateEvent());
+        }
+
     }
 }

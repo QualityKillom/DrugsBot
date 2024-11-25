@@ -1,32 +1,42 @@
 ﻿using Domain.Interface;
 using Domain.Validators.EventsValidator;
-using FluentValidation;
+using MediatR;
 
 namespace Domain.DomainEvents;
 
-public class DrugItemUpdatedEvent : IDomainEvent
+/// <summary>
+/// Событие, которое генерируется при обновлении количества товара в аптечном пункте.
+/// Содержит идентификатор товара и новое количество.
+/// </summary>
+public class DrugItemUpdateEvent : INotification, IDomainEvent
 {
-    public Guid DrugItemId { get; }
-    
-    public double NewAmount { get; }
-    
-    public DrugItemUpdatedEvent(Guid drugItemId, double newAmount)
+    /// <summary>
+    /// Конструктор, создающий событие обновления количества товара.
+    /// </summary>
+    /// <param name="drugItemId">Идентификатор существующего товара (DrugItem).</param>
+    /// <param name="newCount">Новое количество товара.</param>
+    public DrugItemUpdateEvent(Guid drugItemId, decimal newCount)
     {
         DrugItemId = drugItemId;
-        NewAmount = newAmount;
+        NewCount = newCount;
 
         Validate();
     }
-    
+    /// <summary>
+    /// Идентификатор существующего товарного предмета (DrugItem).
+    /// </summary>
+    public Guid DrugItemId { get; }
+
+    /// <summary>
+    /// Новое количество товара.
+    /// </summary>
+    public decimal NewCount { get; }
+
+    /// <summary>
+    /// Валидирует событие перед его добавлением в систему.
+    /// </summary>
     private void Validate()
     {
         var validator = new DrugItemUpdatedEventValidator();
-        var result = validator.Validate(this);
-
-        if (!result.IsValid)
-        {
-            var errors = string.Join(" || ", result.Errors.Select(x => x.ErrorMessage));
-            throw new ValidationException(errors);
-        }
     }
 }

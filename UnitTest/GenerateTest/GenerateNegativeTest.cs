@@ -8,7 +8,11 @@ namespace UnitTest.GenerateTest
     public class GenerateNegativeTest
     {
         private static readonly Bogus.Faker _faker = new();
-
+        
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности Address 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetAddressValidationExceptionsProperties()
         {
             return new List<object[]>
@@ -19,7 +23,10 @@ namespace UnitTest.GenerateTest
                 new object[] { _faker.Address.City(), _faker.Address.StreetName(), _faker.Random.Int(1, 10),null }
             };
         }
-
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности Country 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetCountryValidationExceptionsProperties()
         {
             return new List<object[]>
@@ -29,6 +36,10 @@ namespace UnitTest.GenerateTest
             };
         }
 
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности Drug 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetDrugsValidationExceptionsProperties()
         {
             var country = CountryGenerator.Generator();
@@ -41,6 +52,10 @@ namespace UnitTest.GenerateTest
             };
         }
 
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности DrugsItem
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetDrugsItemValidationExceptionsProperties()
         {
             var drugStore = DrugStoreGenerator.Generator();
@@ -57,6 +72,10 @@ namespace UnitTest.GenerateTest
             };
         }
 
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности DrugStore
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetDrugStoreValidationExceptionsProperties()
         {
             var country = CountryGenerator.Generator();
@@ -68,6 +87,10 @@ namespace UnitTest.GenerateTest
             };
         }
 
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности Profile 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetProfileValidationExceptionsProperties()
         {
             return new List<object[]>
@@ -76,6 +99,10 @@ namespace UnitTest.GenerateTest
                 new object[]{_faker.Random.AlphaNumeric(8), null},
             };
         }
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности Email 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetEmailValidationExceptionsProperties()
         {
             return new List<object[]>
@@ -85,6 +112,10 @@ namespace UnitTest.GenerateTest
             };
         }
 
+        /// <summary>
+        /// Негативный генератор для тестов Validators сущности FavoritesDrug 
+        /// </summary>
+        /// <returns></returns>
         public static IEnumerable<object[]> GetFavoritesValidationExceptionsProperties()
         {
             var profile = ProfileGenerator.Generator();
