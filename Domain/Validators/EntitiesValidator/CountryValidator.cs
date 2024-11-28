@@ -1,7 +1,7 @@
 ﻿using Domain.Entities;
 using FluentValidation;
 
-namespace Domain.Validators.EntitiesValidator;
+namespace Domain.Validators;
 
 
 public class CountryValidator : AbstractValidator<Country>
